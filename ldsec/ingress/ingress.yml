@@ -1,0 +1,27 @@
+apiVersion: networking.io.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-leap
+  namespace: ldsec-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/ssl-protocols: TLSv1.2
+spec:
+  tls:
+  - hosts:
+    - leap.dationn.com
+    secretName: letsencrypt-tls
+  rules:
+  - host: leap.dationn.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          serviceName: leap
+          servicePort: 80
