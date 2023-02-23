@@ -53,10 +53,10 @@ POD_CIDR = "172.18.0.0/16"
 
 KVMSG = "Bradesco Kubernetes Cluster Lab"
 
-COMMON_SCRIPT_URL = "https://raw.githubusercontent.com/arturscheiner/kuberverse/master/labs/kv-k8s-cluster-ha/common.sh"
-SCALER_SCRIPT_URL = "scaler.sh"
-MASTER_SCRIPT_URL = "master.sh"
-WORKER_SCRIPT_URL = "worker.sh"
+COMMON_SCRIPT_URL = "https://github.com/fabionns/leap/blob/main/common.sh"
+SCALER_SCRIPT_URL = "https://github.com/fabionns/leap/blob/main/scaler.sh"
+MASTER_SCRIPT_URL = "https://github.com/fabionns/leap/blob/main/master.sh"
+WORKER_SCRIPT_URL = "https://github.com/fabionns/leap/blob/main/worker.sh"
 
 def colorize(text, color_code)
   "\e[#{color_code}m#{text}\e[0m"
