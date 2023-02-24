@@ -19,7 +19,7 @@
 BOX_IMAGE = "kuberverse/ubuntu-18.04"
 
 # Define the k8s version to be used on this lab.
-KUBE_VERSION = "1.22.3"
+KUBE_VERSION = "1.26.1"
 
 # Define the container runtime that will be used on
 # your lab. From k8s v1.22 the default runtime is containerd.
@@ -53,10 +53,10 @@ POD_CIDR = "172.18.0.0/16"
 
 KVMSG = "Bradesco Kubernetes Cluster Lab"
 
-COMMON_SCRIPT_URL = "https://github.com/fabionns/leap/blob/main/common.sh"
-SCALER_SCRIPT_URL = "https://github.com/fabionns/leap/blob/main/scaler.sh"
-MASTER_SCRIPT_URL = "https://github.com/fabionns/leap/blob/main/master.sh"
-WORKER_SCRIPT_URL = "https://github.com/fabionns/leap/blob/main/worker.sh"
+COMMON_SCRIPT_URL = "https://raw.githubusercontent.com/fabionns/leap/main/common.sh"
+SCALER_SCRIPT_URL = "https://raw.githubusercontent.com/fabionns/leap/main/scaler.sh"
+MASTER_SCRIPT_URL = "https://raw.githubusercontent.com/fabionns/leap/main/master.sh"
+WORKER_SCRIPT_URL = "https://raw.githubusercontent.com/fabionns/leap/main/worker.sh"
 
 def colorize(text, color_code)
   "\e[#{color_code}m#{text}\e[0m"

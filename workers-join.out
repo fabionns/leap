@@ -1,0 +1,2 @@
+kubeadm join 10.8.8.10:6443 --token 1ram45.t5feeelrecnk8mk0 \
+	--discovery-token-ca-cert-hash sha256:f47c27819d8bf1c0b245f947359293beed8e0a33d6f12450719e047eeb4f7f6e 
