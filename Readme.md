@@ -2,6 +2,7 @@
 
 # LAYER DATA OPS
 ## argocd
+```shell
 kubectl create namespace ldops-argocd
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd --namespace ldops-argocd --version 3.26.8
@@ -26,7 +27,7 @@ kubectl create namespace ldsec-certmanager
 wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.43.0/deploy/static/provider/baremetal/deploy.yaml
 kubectl create ns ingress-nginx
 kubectl apply -f deploy.yaml
-# Cert-manager - https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+### Cert-manager - https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
 kubectl create namespace ldsec-cert-manager
 kubectl config view
 kubectl config current-context
