@@ -12,6 +12,7 @@ $ARGOCD="kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubern
 kubens ldops-argocd && kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}""
 kubens ldops-argocd && kubectl get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs -t -I {} argocd login $ARGOCD --username admin --password {} --insecure
 kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=system:serviceaccount:cicd:argocd-application-controller -n ldops-argocd
+shell
 
 ### netie
 kubectl create namespace ldops-nestie
