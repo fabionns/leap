@@ -6,7 +6,7 @@ metadata:
   # deployed yaml
   namespace: ldops-argocd
 spec:
-  project: leap
+  project: default
   source:
     repoURL: 'https://github.com/fabionns/leap.git'
     path: 01-ldops/lenses/helm
