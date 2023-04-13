@@ -21,6 +21,9 @@ kubectl create namespace ldops-nestie
 ### gitlab
 kubectl create namespace ldops-gitlab
 
+### lenses
+kubectl apply -f 01-ldops/lenses/lenses.yaml
+
 # -------------------------------------------------
 
 # LAYER DATA SECURITY

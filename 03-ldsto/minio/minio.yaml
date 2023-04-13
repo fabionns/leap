@@ -8,8 +8,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://bitbucket.org/owshq/big-data-on-k8s.git'
-    path: repository/helm-charts/minio
+    repoURL: 'https://github.com/fabionns/leap.git'
+    path: 01-ldops/lenses/helm
     targetRevision: HEAD
     helm:
       valueFiles:

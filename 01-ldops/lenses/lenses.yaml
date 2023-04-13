@@ -4,19 +4,19 @@ metadata:
   # app name
   name: lenses
   # deployed yaml
-  namespace: cicd
+  namespace: ldops-argocd
 spec:
   project: default
   source:
-    repoURL: 'https://bitbucket.org/owshq/trn-mst-bg-k8s.git'
-    path: repository/helm-charts/lenses
+    repoURL: 'https://github.com/fabionns/leap.git'
+    path: 01-ldops/lenses/helm
     targetRevision: HEAD
     helm:
       valueFiles:
         - values-development.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: dataops
+    namespace: ldops-argocd
   syncPolicy:
     automated:
       prune: true
