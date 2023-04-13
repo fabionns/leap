@@ -4,19 +4,19 @@ metadata:
   # app name
   name: minio-operator
   # deployed yaml
-  namespace: ldops-argocd
+  namespace: ldsto-minio
 spec:
   project: default
   source:
     repoURL: 'https://github.com/fabionns/leap.git'
-    path: 03-ldsto/minio/helm
+    path: 03-ldsto/minio/minio-operator
     targetRevision: HEAD
     helm:
       valueFiles:
         - values-development.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: ldops-argocd
+    namespace: ldsto-minio
   syncPolicy:
     automated:
       prune: true

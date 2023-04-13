@@ -36,7 +36,7 @@ spec:
 {{- if (and (eq .Values.service.type "NodePort") ( .Values.service.nodePort)) }}
       nodePort: {{ .Values.service.nodePort }}
 {{- else }}
-      targetPort: {{ .Values.minioAPIPort }}
+      targetPort: 9000
 {{- end}}
 {{- if .Values.service.externalIPs }}
   externalIPs:

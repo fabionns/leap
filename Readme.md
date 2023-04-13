@@ -7,6 +7,7 @@ kubectl create namespace ldops-argocd
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd --namespace ldops-argocd --version 3.26.8
 kubectl port-forward service/argocd-server -n ldops-argocd 8080:443
+kubectl describe pods -n ldops-argocd
 k patch svc argocd-server -n ldops-argocd -p '{"spec": {"type": "LoadBalancer"}}'
 $ARGOCD="kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}"
 kubens ldops-argocd && kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}""
@@ -55,7 +56,7 @@ kubectl create namespace ldsec-istio
 
 # layer data storage 
 kubectl create namespace ldsto-minio
-kubectl apply layer/03-ldsto/minio/minio-operator.yaml
+kubectl apply -f 03-ldsto/minio/minio-operator.yaml -n ldsto-minio
 kubectl get secrect $(kubectl get serviceaccount console-sa --namespace ldsto-minio -o jsonpath='{.secrets[0].name}') --namespace ldsto-minio -o jsonpath='{.data.token}' | base64 --decode
 
 
@@ -72,7 +73,8 @@ kubectl crate namespace ldsto-elasticsearch
 
 # layer data processing
 ### spark
-helm install spark spark-operator/spark-operator --namespace ldproc --set image.tag=v1beta2-1.3.3-3.1.1
+kubectl create namespace ldproc-spark
+helm install spark spark-operator/spark-operator --namespace ldproc-spark --set image.tag=v1beta2-1.3.3-3.1.1
 
 # layer data exploration
 
@@ -83,4 +85,3 @@ helm install spark spark-operator/spark-operator --namespace ldproc --set image.
 # layer data observability
 
 
-testando commit

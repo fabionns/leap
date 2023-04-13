@@ -4,11 +4,11 @@ metadata:
   # app name
   name: minio
   # deployed yaml
-  namespace: ldops-argocd
+  namespace: cicd
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/fabionns/leap.git'
+    repoURL: 'https://bitbucket.org/owshq/big-data-on-k8s.git'
     path: repository/helm-charts/minio
     targetRevision: HEAD
     helm:
@@ -16,7 +16,7 @@ spec:
         - values-development.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: ldops-argocd
+    namespace: deepstorage
   syncPolicy:
     automated:
       prune: true
