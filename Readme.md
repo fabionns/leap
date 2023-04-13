@@ -13,6 +13,13 @@ $ARGOCD="kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubern
 kubens ldops-argocd && kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}""
 kubens ldops-argocd && kubectl get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs -t -I {} argocd login $ARGOCD --username admin --password {} --insecure
 kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=system:serviceaccount:cicd:argocd-application-controller -n ldops-argocd
+#### register cluster
+CLUSTER="kubernetes-admin@kubernetes"
+argocd cluster add $CLUSTER --in-cluster
+
+# add repo into argo-cd repositories
+REPOSITORY="https://github.com/fabionns/leap.git"
+argocd repo add $REPOSITORY --username fabionns --password ckspa@bhzmg578 --port-forward
 shell
 
 ### netie
@@ -22,6 +29,7 @@ kubectl create namespace ldops-nestie
 kubectl create namespace ldops-gitlab
 
 ### lenses
+kubectl create namespace ldops-lenses
 kubectl apply -f 01-ldops/lenses/lenses.yaml
 
 # -------------------------------------------------

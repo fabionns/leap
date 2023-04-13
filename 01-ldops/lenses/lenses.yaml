@@ -6,7 +6,7 @@ metadata:
   # deployed yaml
   namespace: ldops-argocd
 spec:
-  project: default
+  project: leap
   source:
     repoURL: 'https://github.com/fabionns/leap.git'
     path: 01-ldops/lenses/helm
@@ -16,7 +16,7 @@ spec:
         - values-development.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: ldops-argocd
+    namespace: ldops-lenses
   syncPolicy:
     automated:
       prune: true
