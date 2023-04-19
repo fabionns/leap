@@ -67,7 +67,7 @@ kubectl create namespace ldsec-istio
 
 # layer data storage 
 kubectl create namespace ldsto-minio
-kubectl apply -f 03-ldsto/minio/minio-operator.yaml -n ldsto-minio
+kubectl apply -f 03-ldsto/minio/minio-operator.yaml
 kubectl get secrect $(kubectl get serviceaccount console-sa --namespace ldsto-minio -o jsonpath='{.secrets[0].name}') --namespace ldsto-minio -o jsonpath='{.data.token}' | base64 --decode
 
 
