@@ -96,3 +96,18 @@ helm install spark spark-operator/spark-operator --namespace ldproc-spark --set 
 # layer data observability
 
 
+kubectl patch customresourcedefinitions.apiextensions.k8s.io applicationsets.argoproj.io -p '{"metadata":{"finalizers":null}}'
+kubectl patch customresourcedefinitions.apiextensions.k8s.io applications.argoproj.io -p '{"metadata":{"finalizers":null}}'
+kubectl patch customresourcedefinitions.apiextensions.k8s.io appprojects.argoproj.io -p '{"metadata":{"finalizers":null}}'
+
+kubectl delete customresourcedefinitions.apiextensions.k8s.io applicationsets.argoproj.io 
+kubectl delete customresourcedefinitions.apiextensions.k8s.io applications.argoproj.io 
+kubectl delete customresourcedefinitions.apiextensions.k8s.io appprojects.argoproj.io 
+
+
+
+kubectl patch app minio-operator -p '{"metadata": {"finalizers": ["resources-finalizer.argocd.argoproj.io"]}}' --type merge 
+kubectl delete Applications minio-operator
+
+kubectl patch app minio-operator --type json --patch='[ { "op": "remove", "path": "/metadata/finalizers" } ]'
+kubectl patch app minio-operator --type json -p '{ "op": "remove", "path": "/metadata/finalizers" }'
