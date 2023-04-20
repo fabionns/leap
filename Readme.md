@@ -5,21 +5,23 @@
 ```shell
 kubectl create namespace ldops-argocd
 helm repo add argo https://argoproj.github.io/argo-helm
-helm install argocd argo/argo-cd --namespace ldops-argocd --version 3.26.8
+helm install argocd argo/argo-cd --namespace ldops-argocd --version 5.27.4
 kubectl port-forward service/argocd-server -n ldops-argocd 8080:443
 kubectl describe pods -n ldops-argocd
-k patch svc argocd-server -n ldops-argocd -p '{"spec": {"type": "LoadBalancer"}}'
-$ARGOCD="kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}"
-kubens ldops-argocd && kubectl get services -l app.kubernetes.io/name=argocd-server,app.kubernetes.io/instance=argocd -o jsonpath="{.items[0].status.loadBalancer.ingress[0].ip}""
-kubens ldops-argocd && kubectl get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | xargs -t -I {} argocd login $ARGOCD --username admin --password {} --insecure
+kubectl patch svc argocd-server -n ldops-argocd -p '{"spec": {"type": "ClusterIP"}}'
 kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=system:serviceaccount:cicd:argocd-application-controller -n ldops-argocd
+
 #### register cluster
 CLUSTER="kubernetes-admin@kubernetes"
 argocd cluster add $CLUSTER --in-cluster
 
 # add repo into argo-cd repositories
-REPOSITORY="https://github.com/fabionns/leap.git"
-argocd repo add $REPOSITORY --username fabionns --password ckspa@bhzmg578 --port-forward
+REPOSITORY="https://github.com/fabionns/leap"
+argocd repo add $REPOSITORY --username fabionns --password ckspa@bhzmg578 
+
+argocd repo add git@github.com:fabionns/leap.git --ssh-private-key-path ~/.ssh/id_rsa
+
+
 shell
 
 ### netie

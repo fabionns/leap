@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   # app name
-  name: minio
+  name: minio-operator
   # deployed yaml
   namespace: ldops-argocd
 spec:
