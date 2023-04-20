@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/fabionns/leap.git'
-    path: 03-ldsto/minio/helm/minio-operator
+    path: 03-ldsto/minio/helm
     targetRevision: HEAD
     helm:
       valueFiles:
