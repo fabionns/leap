@@ -19,7 +19,7 @@ spec:
 
 {{- if .Values.persistence.storageClass }}
 {{- if (eq "-" .Values.persistence.storageClass) }}
-  storageClassName: "local-storage"
+  storageClassName: "default"
 {{- else }}
   storageClassName: "{{ .Values.persistence.storageClass }}"
 {{- end }}

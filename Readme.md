@@ -102,7 +102,7 @@ kubectl patch customresourcedefinitions.apiextensions.k8s.io applicationsets.arg
 kubectl patch customresourcedefinitions.apiextensions.k8s.io applications.argoproj.io -p '{"metadata":{"finalizers":null}}'
 kubectl patch customresourcedefinitions.apiextensions.k8s.io appprojects.argoproj.io -p '{"metadata":{"finalizers":null}}'
 
-kubectl delete customresourcedefinitions.apiextensions.k8s.io applicationsets.argoproj.io 
+kubectl delete customresourcedefinitions.apiextensions.k8s.io applicationsets.argoproj.io clusterissuers.cert-manager.io 
 kubectl delete customresourcedefinitions.apiextensions.k8s.io applications.argoproj.io 
 kubectl delete customresourcedefinitions.apiextensions.k8s.io appprojects.argoproj.io 
 
