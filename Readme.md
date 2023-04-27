@@ -7,9 +7,10 @@ kubectl create namespace ldops-argocd
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd --namespace ldops-argocd --version 5.27.4
 kubectl port-forward service/argocd-server -n ldops-argocd 8080:443
+kubectl -n ldops-argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 kubectl describe pods -n ldops-argocd
 kubectl patch svc argocd-server -n ldops-argocd -p '{"spec": {"type": "ClusterIP"}}'
-kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=system:serviceaccount:cicd:argocd-application-controller -n ldops-argocd
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=system:serviceaccount:ldops-argocd:argocd-application-controller -n ldops-argocd
 
 #### register cluster
 CLUSTER="kubernetes-admin@kubernetes"
@@ -20,12 +21,12 @@ REPOSITORY="https://github.com/fabionns/leap"
 argocd repo add $REPOSITORY --username fabionns --password ckspa@bhzmg578 
 
 argocd repo add git@github.com:fabionns/leap.git --ssh-private-key-path ~/.ssh/id_rsa
-
-
 shell
 
 ### netie
+```shell
 kubectl create namespace ldops-nestie
+```shell
 
 ### gitlab
 kubectl create namespace ldops-gitlab
@@ -34,7 +35,7 @@ kubectl create namespace ldops-gitlab
 kubectl create namespace ldops-lenses
 kubectl apply -f 01-ldops/lenses/lenses.yaml
 
-# -------------------------------------------------
+# ------------------------------------------------- 
 
 # LAYER DATA SECURITY
 ### cert-manager
@@ -102,7 +103,7 @@ kubectl patch customresourcedefinitions.apiextensions.k8s.io applicationsets.arg
 kubectl patch customresourcedefinitions.apiextensions.k8s.io applications.argoproj.io -p '{"metadata":{"finalizers":null}}'
 kubectl patch customresourcedefinitions.apiextensions.k8s.io appprojects.argoproj.io -p '{"metadata":{"finalizers":null}}'
 
-kubectl delete customresourcedefinitions.apiextensions.k8s.io applicationsets.argoproj.io clusterissuers.cert-manager.io 
+kubectl delete customresourcedefinitions.apiextensions.k8s.io applicationsets.argoproj.io
 kubectl delete customresourcedefinitions.apiextensions.k8s.io applications.argoproj.io 
 kubectl delete customresourcedefinitions.apiextensions.k8s.io appprojects.argoproj.io 
 
