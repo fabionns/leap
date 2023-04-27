@@ -71,8 +71,9 @@ kubectl create namespace ldsec-istio
 # layer data storage 
 kubectl create namespace ldsto-minio
 kubectl apply -f 03-ldsto/minio/minio-operator.yaml
-kubectl get secrect $(kubectl get serviceaccount console-sa --namespace ldsto-minio -o jsonpath='{.secrets[0].name}') --namespace ldsto-minio -o jsonpath='{.data.token}' | base64 --decode
-
+kubectl port-forward service/minio-operator -n ldsto-minio 9090:9090
+kubectl get secrect $(kubectl get serviceaccount minio-sa --namespace ldsto-minio -o jsonpath='{.secrets[0].name}') --namespace ldsto-minio -o jsonpath='{.data.token}' | base64 --decode
+eyJhbGciOiJSUzI1NiIsImtpZCI6InRoSDJ1VXZpUWpCZXhsMng3b3NyeDFCUFlGRFZxYl9OZUhtcW9tYU5XSkkifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJtaW5pby1vcGVyYXRvciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJjb25zb2xlLXNhLXNlY3JldCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJjb25zb2xlLXNhIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiODJiYmMwNzItZmJmMy00YmQ0LWI3MDctNWNiMDBmMmZlOGYxIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Om1pbmlvLW9wZXJhdG9yOmNvbnNvbGUtc2EifQ.EhymR6sAmBPUhPZyeukl00L8gG0IB-e82re6p8_Vg7i-SKFXgsUkUh0mMpgKCv1LChUPMYdW0wYlYSDfj32R5GdUvsQzfsPyR2eUIUbCCRXHG5Eoz2Hz64N6R1DaK72rUmKIg2gX46byr_2LWxwIDvxyNnu0xdhiU1Q8Uo-ONQNuNq83PpRUEXtHFxPYhCePiunGWa8y7jJEpOFycaaWNlbPn91eeVEHXryo-QIeJZzTXjRq0tZmJI5BOsf4EcaL1zaoVasDdquXnd-u80dVFpkIhmXV09_kRmjN2tKxKg2R7V1kaCI1zeQOL2Fyjq1Dbeig585vxjsRNNVclPiB1g
 
 kubectl crate namespace ldsto-clickhouse
 kubectl crate namespace ldsto-yugabyte
